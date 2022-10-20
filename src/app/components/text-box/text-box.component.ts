@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AccountsService } from 'src/app/service/accounts.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class TextBoxComponent implements OnInit, OnDestroy {
   text = '';
   backendResponse = ''
 ;
-  constructor(private voiceService : VoiceRecognitionService) {
+  constructor(private voiceService : VoiceRecognitionService,
+              private accountsService: AccountsService) {
     this.voiceService.init();
     this.subscribeVoiceService();
   }
@@ -22,9 +24,9 @@ export class TextBoxComponent implements OnInit, OnDestroy {
   startVoiceService(){
     this.voiceService.start(); 
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
-      if (this.text === 'hello' || this.text === 'goodbye' || this.text === 'transfer') {
-        this.backendResponse = this.text;
-      }
+      this.accountsService.getAllClients(this.text).subscribe(response => {
+        this.backendResponse = JSON.stringify(response);
+      });
     });
   } 
 
@@ -39,12 +41,9 @@ export class TextBoxComponent implements OnInit, OnDestroy {
     });
   }
 
-<<<<<<< HEAD
   ngOnDestroy(): void {
     // this.voiceService.recognition.unsubscribe();
   }
 
 
-=======
->>>>>>> 97f4a32b9867edaaa091de3841d32c5cae314d39
 }
