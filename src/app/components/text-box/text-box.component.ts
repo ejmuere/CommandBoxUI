@@ -39,9 +39,12 @@ export class TextBoxComponent implements OnInit, OnDestroy {
     });
   }
 
+<<<<<<< HEAD
   ngOnDestroy(): void {
     // this.voiceService.recognition.unsubscribe();
   }
 
 
+=======
+>>>>>>> 97f4a32b9867edaaa091de3841d32c5cae314d39
 }
