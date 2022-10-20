@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 
 @Component({
@@ -6,23 +6,42 @@ import { VoiceRecognitionService } from 'src/app/service/voice-recognition.servi
   templateUrl: './text-box.component.html',
   styleUrls: ['./text-box.component.css']
 })
-export class TextBoxComponent implements OnInit {
+export class TextBoxComponent implements OnInit, OnDestroy {
 
   text = '';
-
-  constructor(public service : VoiceRecognitionService) {
-    this.service.init()
+  backendResponse = ''
+;
+  constructor(private voiceService : VoiceRecognitionService) {
+    this.voiceService.init();
+    this.subscribeVoiceService();
   }
 
   ngOnInit(): void {
   }
 
-  startService(){
-    this.service.start()
+  startVoiceService(){
+    this.voiceService.start(); 
+    this.voiceService.recognition.addEventListener('end', (condition: any) => {
+      if (this.text === 'hello' || this.text === 'goodbye' || this.text === 'transfer') {
+        this.backendResponse = this.text;
+      }
+    });
+  } 
+
+  subscribeVoiceService() {
+    this.voiceService.recognition.addEventListener('result', (e:any) => {
+      const transcript = Array.from(e.results) 
+        .map((result:any) => result[0])
+        .map((result) => result.transcript)
+        .join('');
+      this.text = transcript;
+      console.log(transcript);
+    });
   }
 
-  stopService(){
-    this.service.stop()
+  ngOnDestroy(): void {
+    // this.voiceService.recognition.unsubscribe();
   }
+
 
 }
