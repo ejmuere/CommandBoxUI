@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 
 @Component({
   selector: 'app-text-box',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextBoxComponent implements OnInit {
 
-  constructor() { }
+  text = '';
+
+  constructor(public service : VoiceRecognitionService) {
+    this.service.init()
+  }
 
   ngOnInit(): void {
+  }
+
+  startService(){
+    this.service.start()
+  }
+
+  stopService(){
+    this.service.stop()
   }
 
 }
