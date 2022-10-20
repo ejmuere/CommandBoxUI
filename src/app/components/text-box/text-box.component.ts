@@ -21,8 +21,4 @@ export class TextBoxComponent implements OnInit {
     this.service.start()
   }
 
-  stopService(){
-    this.service.stop()
-  }
-
 }

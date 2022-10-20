@@ -7,10 +7,7 @@ declare var webkitSpeechRecognition: any;
   providedIn: 'root'
 })
 export class VoiceRecognitionService {
-
-  text = '';
   recognition =  new webkitSpeechRecognition();
-  isStoppedSpeechRecog = false;
 
   tempWords: any;
 
@@ -32,28 +29,8 @@ export class VoiceRecognitionService {
   }
 
   start() {
-    this.isStoppedSpeechRecog = false;
     this.recognition.start();
     console.log("Speech recognition started")
-    this.recognition.addEventListener('end', (condition: any) => {
-      if (this.isStoppedSpeechRecog) {
-        this.recognition.stop();
-        console.log("End speech recognition")
-      } else {
-        this.wordConcat()
-        this.recognition.start();
-      }
-    });
-  }
-  stop() {
-    this.isStoppedSpeechRecog = true;
-    this.wordConcat()
-    this.recognition.stop();
-    console.log("End speech recognition")
   }
 
-  wordConcat() {
-    this.text = this.text + ' ' + this.tempWords + '.';
-    this.tempWords = '';
-  }
 }
