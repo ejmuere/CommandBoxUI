@@ -1,6 +1,8 @@
-<div style="margin: 100px;">
-  <h1>Voice recognition</h1>
-  <button style="margin: 10px;" (click)="startVoiceService()">Start</button>
-  <p>Picked up text: {{text}}</p>
-  <p>Backend Response: {{backendResponse}}</p>
+<div >
+<div class="input-contain">
+  <input type="text" id="fname" name="fname" autocomplete="off" value="{{text}}" aria-labelledby="placeholder-fname" (keyup.enter)="submitInput()">
+  <img src="assets/svg/mic.svg" (click)="startVoiceService()" />
+</div>
+
+<p>Backend Response: {{backendResponse}}</p> 
 </div>
