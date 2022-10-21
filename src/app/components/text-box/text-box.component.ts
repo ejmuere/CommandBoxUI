@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/service/accounts.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
-import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-text-box',
   templateUrl: './text-box.component.html',
   styleUrls: ['./text-box.component.css']
 })
-export class TextBoxComponent implements OnInit, OnDestroy {
+export class TextBoxComponent implements OnInit {
 
   text = '';
   backendResponse = ''
+  isRecordingVoice = false;
 ;
   constructor(private voiceService : VoiceRecognitionService,
               private accountsService: AccountsService) {
@@ -28,8 +28,10 @@ export class TextBoxComponent implements OnInit, OnDestroy {
     });
   }
   startVoiceService(){
+    this.isRecordingVoice = true;
     this.voiceService.start();
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
+      this.isRecordingVoice = false;
       this.accountsService.getAllClients(this.text).subscribe(response => {
         this.backendResponse = JSON.stringify(response);
       });
@@ -51,5 +53,5 @@ export class TextBoxComponent implements OnInit, OnDestroy {
     // this.voiceService.recognition.unsubscribe();
   }
 
-
+  
 }

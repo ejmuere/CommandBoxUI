@@ -1,8 +1,13 @@
 <div >
 <div class="input-contain">
   <input type="text" id="fname" name="fname" autocomplete="off" value="{{text}}" aria-labelledby="placeholder-fname" (keyup.enter)="submitInput()">
-  <img src="assets/svg/mic.svg" (click)="startVoiceService()" />
+  <div>
+  <button (click)="startVoiceService()" mat-fab color="accent" aria-label="Example icon button with a filter list icon">
+    <mat-spinner *ngIf="isRecordingVoice"></mat-spinner>
+    <img src="assets/svg/mic.svg"  />
+  </button>
+  </div>
 </div>
 
-<p>Backend Response: {{backendResponse}}</p> 
+<p>Backend Response: {{backendResponse}}</p>
 </div>

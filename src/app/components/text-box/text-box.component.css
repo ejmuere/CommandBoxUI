@@ -14,7 +14,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh; 
+  height: 50vh;
 }
 input{
   height: 5rem;
@@ -68,4 +68,16 @@ input:focus + .placeholder-text .text{
 .text{
   transform: translate(0);
   transition: transform 0.15s ease-out, font-size 0.15s ease-out, background-color 0.2s ease-out, color 0.15s ease-out;
+}
+
+.mat-fab{
+  position: relative;
+  margin-left: 10px;
+}
+
+.mat-spinner{
+  position: absolute;
+  left:-20px;
+  bottom:-20px;
+
 }
