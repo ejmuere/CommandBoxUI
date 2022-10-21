@@ -8,11 +8,15 @@ import { TextBoxComponent } from './components/text-box/text-box.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextBoxComponent
+    TextBoxComponent,
+    ClientManagementComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -21,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
