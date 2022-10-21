@@ -1,5 +1,15 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
-  </mat-form-field>
+<div >
+<div class="input-contain">
+  <input type="text" id="fname" name="fname" autocomplete="off" value="{{text}}" aria-labelledby="placeholder-fname" (keyup.enter)="submitInput()">
+  <div>
+  <button (click)="startVoiceService()" mat-fab color="isRecordingVoice?warn'':'primary'" aria-label="Example icon button with a filter list icon">
+    <mat-spinner *ngIf="isRecordingVoice"></mat-spinner>
+    <img src="assets/svg/mic.svg"  />
+  </button>
+  </div>
+</div>
+
+<div *ngIf="showBalance">
+  <p>Backend Response: {{backendResponse}}</p>
+</div>
+</div>

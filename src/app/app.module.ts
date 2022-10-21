@@ -6,17 +6,30 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextBoxComponent } from './components/text-box/text-box.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MoneyMarketComponent } from './components/money-market/money-market.component';
+import { MatTableModule } from '@angular/material/table';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextBoxComponent
+    TextBoxComponent,
+    MoneyMarketComponent,
+    ClientManagementComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatTabsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
