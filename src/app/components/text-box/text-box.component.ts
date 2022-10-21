@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ControllerRequest } from 'src/app/model/request';
 import { AccountsService } from 'src/app/service/accounts.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 
@@ -24,8 +25,11 @@ export class TextBoxComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  submitInput(){
-    this.accountsService.getAllClients(this.text).subscribe(response => {
+  submitInput(){ 
+    const message = '{ message : '+this.text+'}';  
+    this.accountsService.getControllerResponse(message).subscribe(response => {
+      console.log(response);
+      debugger
       this.backendResponse = JSON.stringify(response);
     });
     this.handleResponse(this.text);

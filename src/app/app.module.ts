@@ -13,8 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule} from '@angular/material/card';
-import { Account360Component } from './components/account360/account360.component';
-
+import { Account360Component } from './components/account360/account360.component'; 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,8 @@ import { Account360Component } from './components/account360/account360.componen
     MatTabsModule,
     MatTableModule,
     MatCardModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

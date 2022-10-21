@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; 
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,16 @@ export class AccountsService {
     },
   ];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getClient(name: string) {
 
+  }
+
+  getControllerResponse(input: any ): Observable<any> { 
+    return this.http.post<any>("localhost:8080/intent/postCommand", input);
   }
   
   getAllClients(rawString: string): Observable<any> {
