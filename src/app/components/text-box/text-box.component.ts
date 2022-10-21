@@ -28,6 +28,7 @@ export class TextBoxComponent implements OnInit{
     this.accountsService.getAllClients(this.text).subscribe(response => {
       this.backendResponse = JSON.stringify(response);
     });
+    this.handleResponse(this.text);
   }
   startVoiceService(){
     this.isRecordingVoice = true;
@@ -56,7 +57,7 @@ export class TextBoxComponent implements OnInit{
     //change to response
     switch(text) {
       case 'show customer profile': {
-        window.open('http://localhost:4200/ClientManagement',)
+        window.open('http://localhost:4200/ClientManagement','','popup=true')
          break;
       }
       case "show balance": {
@@ -64,7 +65,7 @@ export class TextBoxComponent implements OnInit{
          break;
       }
       case "transfer funds": {
-        window.open('http://localhost:4200/MoneyMarket',)
+        window.open('http://localhost:4200/MoneyMarket','','popup=true')
         break;
       }
      case "add_notes": {
