@@ -10,12 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MoneyMarketComponent } from './components/money-market/money-market.component';
 import { MatTableModule } from '@angular/material/table';
+import { ClientManagementComponent } from './components/client-management/client-management.component';
+import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     TextBoxComponent,
-    MoneyMarketComponent
+    MoneyMarketComponent,
+    ClientManagementComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,7 @@ import { MatTableModule } from '@angular/material/table';
     MatFormFieldModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
     MatTableModule
   ],
   providers: [],
