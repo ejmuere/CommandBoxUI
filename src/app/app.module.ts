@@ -12,6 +12,8 @@ import { MoneyMarketComponent } from './components/money-market/money-market.com
 import { MatTableModule } from '@angular/material/table';
 import { ClientManagementComponent } from './components/client-management/client-management.component';
 import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatTabGroup, MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
