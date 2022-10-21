@@ -1,6 +1,6 @@
 <div>
   <div class="input-contain">
-    <input type="text" id="fname" name="fname" autocomplete="off" [value]="text" aria-labelledby="placeholder-fname"
+    <input type="text" id="fname" name="fname" autocomplete="off"  [(ngModel)]="text" aria-labelledby="placeholder-fname"
       (keyup.enter)="submitInput()" />
     <div>
       <button (click)="startVoiceService()" mat-fab color="isRecordingVoice?warn'':'primary'"
@@ -13,7 +13,7 @@
 
   <div *ngIf="showBalance">
     <mat-card class="example-card">
-      <mat-card-subtitle>Allen Smith</mat-card-subtitle>
+      <mat-card-subtitle>{{client_name}}'s {{account_type}} account</mat-card-subtitle> 
       <mat-card-title>Balance</mat-card-title>
       <mat-card-content>
         <p>$1000000000</p>

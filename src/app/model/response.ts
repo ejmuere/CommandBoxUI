@@ -1,14 +1,24 @@
-// export class Response{
-//     success:boolean;
-//     query:string;
-//     userName:string;
-//     actionType:string;
-//     intent:NluIntents;
-//     data: AccountInfo;
-// }
+export interface ResponseBody{
+    success: boolean;
+    query: string;
+    userName:string;
+    actionType:string;
+    intent: string;
+    data: data;
+}
 
-// export class AccountInfo{
-//   name: string;
-//   checking: number;
-//   balance: number;
-// }
+export interface Entity{
+    entity: string,
+    start: number,
+    end: number,
+    confidence_entity: number,
+    value:  string,
+    extractor: string
+    role: string
+}
+
+export interface data{
+    entityList: Entity[],
+    intent: string
+}
+ 
