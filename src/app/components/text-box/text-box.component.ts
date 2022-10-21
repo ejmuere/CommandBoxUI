@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AccountsService } from 'src/app/service/accounts.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
+import {MatIconRegistry} from '@angular/material/icon';
 
 @Component({
   selector: 'app-text-box',
@@ -21,6 +22,11 @@ export class TextBoxComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
+  submitInput(){
+    this.accountsService.getAllClients(this.text).subscribe(response => {
+      this.backendResponse = JSON.stringify(response);
+    });
+  }
   startVoiceService(){
     this.voiceService.start(); 
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
