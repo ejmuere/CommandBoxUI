@@ -1,7 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MoneyMarketComponent } from './components/money-market/money-market.component';
+import { TextBoxComponent } from './components/text-box/text-box.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+
+  { path: 'TextBox', component: TextBoxComponent },
+  { path: 'MoneyMarket', component: MoneyMarketComponent },
+  // { path: 'ClientManagement', component: ClientManagementComponent },
+  {
+    path: "",
+    redirectTo: '/TextBox',
+    pathMatch: 'full'
+  }
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

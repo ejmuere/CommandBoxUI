@@ -34,6 +34,7 @@ export class TextBoxComponent implements OnInit{
     this.voiceService.start();
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
       this.isRecordingVoice = false;
+      this.handleResponse(this.text);
       this.accountsService.getAllClients(this.text).subscribe(response => {
         this.backendResponse = JSON.stringify(response);
       });
@@ -51,18 +52,19 @@ export class TextBoxComponent implements OnInit{
     });
   }
 
-  handleResponse(response:any){
-    switch(response.actionType) {
-      case 'show_customer_profile': {
-
+  handleResponse(text:any){
+    //change to response
+    switch(text) {
+      case 'show customer profile': {
+        window.open('http://localhost:4200/ClientManagement',)
          break;
       }
-      case "show_balance": {
+      case "show balance": {
          this.showBalance = true
          break;
       }
-      case "transfer_funds": {
-        //statements;
+      case "transfer funds": {
+        window.open('http://localhost:4200/MoneyMarket',)
         break;
       }
      case "add_notes": {
@@ -77,7 +79,8 @@ export class TextBoxComponent implements OnInit{
       //statements;
       break;
   }
-
+  //response action types
+  //show_customer_profile
   // show_balance
   // transfer_funds
   // add_notes

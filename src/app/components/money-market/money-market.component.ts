@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-money-market',
@@ -30,7 +31,7 @@ export class MoneyMarketComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'checking', 'savings', 'brokerage'];
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
