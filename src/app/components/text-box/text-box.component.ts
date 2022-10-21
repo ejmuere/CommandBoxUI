@@ -20,17 +20,17 @@ export class TextBoxComponent implements OnInit, OnDestroy {
   }
 
   startVoiceService(){
-    this.voiceService.start(); 
+    this.voiceService.start();
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
       if (this.text === 'hello' || this.text === 'goodbye' || this.text === 'transfer') {
         this.backendResponse = this.text;
       }
     });
-  } 
+  }
 
   subscribeVoiceService() {
     this.voiceService.recognition.addEventListener('result', (e:any) => {
-      const transcript = Array.from(e.results) 
+      const transcript = Array.from(e.results)
         .map((result:any) => result[0])
         .map((result) => result.transcript)
         .join('');
@@ -39,12 +39,9 @@ export class TextBoxComponent implements OnInit, OnDestroy {
     });
   }
 
-<<<<<<< HEAD
   ngOnDestroy(): void {
     // this.voiceService.recognition.unsubscribe();
   }
 
 
-=======
->>>>>>> 97f4a32b9867edaaa091de3841d32c5cae314d39
 }
