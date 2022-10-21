@@ -7,33 +7,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./money-market.component.css']
 })
 export class MoneyMarketComponent implements OnInit {
-
+  name = '';
+  source_account = '';
+  target_account = '';
+  amount='';
   dataSource = [
     {
-      "name": "Greg Murphy",
-      "checking": 200,
-      "savings": 500,
-      "brokerage": 600
-    },
-    {
-      "name": "Allen Smith",
-      "checking": 100,
-      "savings": 200,
-      "brokerage": 300
-    },
-    {
-      "name": "John Doe",
-      "checking": 400,
-      "savings": 600,
-      "brokerage": 700
-    },
+      "person_name": this.name,
+      "source_account_type": this.source_account,
+      "target_account_type": this.target_account,
+      "amount": this.amount
+    }
   ];
 
-  displayedColumns: string[] = ['name', 'checking', 'savings', 'brokerage'];
+  displayedColumns: string[] = ['person_name', 'source_account_type', 'target_account_type', 'amount'];
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    //person_name='+person_name+"target_account_type="+target_account_type+"&source_account_type="+source_account_type+"&amount="+amount 
+    this.name = this.route.snapshot.queryParams['person_name'];
+    this.source_account = this.route.snapshot.queryParams['source_account_type'];
+    this.target_account = this.route.snapshot.queryParams['target_account_type'];
+    this.amount=this.route.snapshot.queryParams['amount'];
   }
 
 }

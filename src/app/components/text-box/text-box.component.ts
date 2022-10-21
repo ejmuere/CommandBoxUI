@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ControllerRequest } from 'src/app/model/request';
+import { ResponseBody } from 'src/app/model/response';
 import { AccountsService } from 'src/app/service/accounts.service';
 import { VoiceRecognitionService } from 'src/app/service/voice-recognition.service';
 
@@ -14,8 +15,10 @@ export class TextBoxComponent implements OnInit{
   backendResponse = ''
   isRecordingVoice = false;
   showBalance = false;
-  windowOpen = false;
-;
+  windowOpen = false; 
+  client_name = '';
+  account_type = '';
+
   constructor(private voiceService : VoiceRecognitionService,
               private accountsService: AccountsService) {
     this.voiceService.init();
@@ -25,23 +28,19 @@ export class TextBoxComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  submitInput(){ 
-    const message = '{ message : '+this.text+'}';  
-    this.accountsService.getControllerResponse(message).subscribe(response => {
-      console.log(response);
-      debugger
-      this.backendResponse = JSON.stringify(response);
+  submitInput(){  
+    this.accountsService.getControllerResponse(this.text).subscribe(response => { 
+      this.handleResponse(response);
     });
-    this.handleResponse(this.text);
+   
   }
   startVoiceService(){
     this.isRecordingVoice = true;
     this.voiceService.start();
     this.voiceService.recognition.addEventListener('end', (condition: any) => {
       this.isRecordingVoice = false;
-      this.handleResponse(this.text);
-      this.accountsService.getAllClients(this.text).subscribe(response => {
-        this.backendResponse = JSON.stringify(response);
+      this.accountsService.getControllerResponse(this.text).subscribe(response => { 
+        this.handleResponse(response);
       });
     });
   }
@@ -57,19 +56,36 @@ export class TextBoxComponent implements OnInit{
     });
   }
 
-  handleResponse(text:any){
+  handleResponse(response:ResponseBody){
     //change to response
-    switch(text) {
+    switch(response.actionType) {
       case 'show customer profile': {
         window.open('http://localhost:4200/ClientManagement','','popup=true')
          break;
       }
-      case "show balance": {
-         this.showBalance = true
+      case "show_balance": {
+         this.showBalance = true;
+         const person_name = response.data.entityList.filter( entity =>  entity.entity==='PERSON' && entity.extractor==='SpacyEntityExtractor')[0].value;
+         const account_type = response.data.entityList.filter( entity =>  entity.entity==='account_type')[0].value;
+         this.client_name = person_name;
+         this.account_type = account_type;
          break;
       }
-      case "transfer funds": {
-        window.open('http://localhost:4200/MoneyMarket','','popup=true')
+      case "show_customer_profile": {
+        const person_name = response.data.entityList.filter( entity =>  entity.entity==='PERSON' && entity.extractor==='SpacyEntityExtractor')[0].value;  
+        const urltoOpen = 'http://localhost:4200/ClientManagement?person_name='+person_name;
+        console.log("url to open "+urltoOpen);
+        window.open(urltoOpen,'','popup=true')
+        break;
+     }
+      case "transfer_funds": {  
+        const person_name = response.data.entityList.filter( entity =>  entity.entity==='PERSON' && entity.extractor==='SpacyEntityExtractor')[0].value;
+        const target_account_type = response.data.entityList.filter( entity =>  entity.entity==='account_type' && entity.role==='target')[0].value;
+        const source_account_type = response.data.entityList.filter( entity =>  entity.entity==='account_type' && entity.role==='source')[0].value;
+        const amount = response.data.entityList.filter( entity =>  entity.entity === 'Amount')[0].value;
+        const urltoOpen = 'http://localhost:4200/MoneyMarket?person_name='+person_name+"&target_account_type="+target_account_type+"&source_account_type="+source_account_type+"&amount="+amount;
+        console.log("url to open "+urltoOpen);
+        window.open(urltoOpen,'','popup=true')
         break;
       }
      case "add_notes": {

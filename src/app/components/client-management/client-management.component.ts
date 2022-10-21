@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router'; 
 
 @Component({
   selector: 'app-client-management',
@@ -7,10 +8,12 @@ import {MatTabsModule} from '@angular/material/tabs';
   styleUrls: ['./client-management.component.css']
 })
 export class ClientManagementComponent implements OnInit {
-
-  constructor() { }
+  name='';
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.name = this.route.snapshot.queryParams['person_name']; 
+    console.log("    this.name>>"+    this.name);
   }
 
 }
