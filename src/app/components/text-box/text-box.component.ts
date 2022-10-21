@@ -7,11 +7,13 @@ import { VoiceRecognitionService } from 'src/app/service/voice-recognition.servi
   templateUrl: './text-box.component.html',
   styleUrls: ['./text-box.component.css']
 })
-export class TextBoxComponent implements OnInit {
+export class TextBoxComponent implements OnInit{
 
   text = '';
   backendResponse = ''
   isRecordingVoice = false;
+  showBalance = false;
+  windowOpen = false;
 ;
   constructor(private voiceService : VoiceRecognitionService,
               private accountsService: AccountsService) {
@@ -49,9 +51,43 @@ export class TextBoxComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    // this.voiceService.recognition.unsubscribe();
+  handleResponse(response:any){
+    switch(response.actionType) {
+      case 'show_customer_profile': {
+
+         break;
+      }
+      case "show_balance": {
+         this.showBalance = true
+         break;
+      }
+      case "transfer_funds": {
+        //statements;
+        break;
+      }
+     case "add_notes": {
+      //statements;
+      break;
+     }
+    case "call_customer": {
+      //statements;
+      break;
+    }
+  default: {
+      //statements;
+      break;
   }
 
-  
+  // show_balance
+  // transfer_funds
+  // add_notes
+  // call_customer
+  }
+
+  // ngOnDestroy(): void {
+  //   // this.voiceService.recognition.unsubscribe();
+  // };
+
+
+}
 }
